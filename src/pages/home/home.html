@@ -1,14 +1,41 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Ionic Geocoder
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+   <form 
+      *ngIf="displayForward"
+      [formGroup]="form" 
+      (ngSubmit)="performForwardGeocoding(form.value)">
+      <ion-list>
+         <ion-item margin-bottom>
+            <ion-label>Local</ion-label>
+            <ion-input 
+               type="text" 
+               formControlName="keyword"></ion-input>
+         </ion-item>
+   
+   
+         <ion-item margin-bottom>
+            <button 
+               ion-button 
+               color="primary"
+               text-center
+               block
+               [disabled]="!form.valid">Geocode este local</button>
+         </ion-item>
+   
+      </ion-list>
+   </form>
+
+
+   <section *ngIf="geocoded">
+      {{ results }}
+   </section>
+
 </ion-content>
